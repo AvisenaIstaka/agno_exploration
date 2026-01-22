@@ -1,0 +1,77 @@
+{
+  "table_name": "training_history",
+  "table_description": "Contains records of all employee training programs, including course details, costs, completion status, and certifications obtained from 2024 to 2025.",
+  "use_cases": [
+    "Track employee training and development",
+    "Calculate training costs by employee or department",
+    "Identify employees with certifications",
+    "Monitor training completion rates",
+    "Analyze training investment and ROI"
+  ],
+  "data_quality_notes": [
+    "status is TEXT with CHECK constraint - use exact matches: 'Completed', 'In Progress', 'Scheduled', 'Cancelled'",
+    "cost is in IDR (Indonesian Rupiah) with DECIMAL(12,2) precision",
+    "certification_obtained is BOOLEAN - TRUE if certification was awarded, FALSE otherwise",
+    "duration_hours is integer representing total training duration",
+    "Sample data contains 12 training records for various employees",
+    "training_category includes values like 'Technical', 'Soft Skills', 'Professional', 'Sales', 'Marketing', 'Leadership', 'HR', 'Management'",
+    "Cost can be NULL for some trainings"
+  ],
+  "table_columns": [
+    {
+      "name": "training_id",
+      "type": "int",
+      "description": "Primary key. Unique identifier for each training record."
+    },
+    {
+      "name": "employee_id",
+      "type": "int",
+      "description": "Foreign key to employees table. References the employee who attended the training."
+    },
+    {
+      "name": "training_name",
+      "type": "varchar(200)",
+      "description": "Name or title of the training program (e.g., 'Advanced Python Programming', 'Leadership Development Program')."
+    },
+    {
+      "name": "training_category",
+      "type": "varchar(50)",
+      "description": "Category of the training (e.g., 'Technical', 'Soft Skills', 'Leadership', 'Sales', 'Marketing'). Can be NULL."
+    },
+    {
+      "name": "start_date",
+      "type": "date",
+      "description": "Date when the training started. Format: YYYY-MM-DD. Can be NULL."
+    },
+    {
+      "name": "end_date",
+      "type": "date",
+      "description": "Date when the training ended. Format: YYYY-MM-DD. Can be NULL."
+    },
+    {
+      "name": "duration_hours",
+      "type": "int",
+      "description": "Total duration of the training in hours."
+    },
+    {
+      "name": "cost",
+      "type": "decimal(12,2)",
+      "description": "Cost of the training in IDR (Indonesian Rupiah). Can be NULL. Use COALESCE for aggregations."
+    },
+    {
+      "name": "status",
+      "type": "varchar(20)",
+      "description": "Current status of the training. Allowed values: 'Completed', 'In Progress', 'Scheduled', 'Cancelled'. Use exact string matches in queries."
+    },
+    {
+      "name": "certification_obtained",
+      "type": "boolean",
+      "description": "Indicates whether a certification was obtained. TRUE if certified, FALSE otherwise. Default is FALSE."
+    },
+    {
+      "name": "trainer_name",
+      "type": "varchar(100)",
+      "description": "Name of the trainer or instructor who conducted the training. Can be NULL."
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "table_name": "salary_history",
+  "table_description": "Contains complete salary change history for all employees, tracking every salary adjustment with effective dates and reasons from 2018 to 2023.",
+  "use_cases": [
+    "Track salary progression over time",
+    "Calculate salary growth percentage",
+    "Identify reasons for salary changes",
+    "Get current salary for employees",
+    "Analyze compensation trends by department or position"
+  ],
+  "data_quality_notes": [
+    "salary_amount is in IDR (Indonesian Rupiah) with DECIMAL(12,2) precision",
+    "salary_type is TEXT with CHECK constraint - use exact matches: 'Monthly', 'Hourly', 'Annual'",
+    "Most entries use 'Monthly' salary type in sample data",
+    "To get current salary: use MAX(effective_date) subquery per employee",
+    "change_reason includes values like 'Initial Salary', 'Annual Raise', 'Promotion'",
+    "Sample data contains 30 salary records for 14 employees",
+    "Multiple records per employee show salary progression"
+  ],
+  "table_columns": [
+    {
+      "name": "salary_id",
+      "type": "int",
+      "description": "Primary key. Unique identifier for each salary record."
+    },
+    {
+      "name": "employee_id",
+      "type": "int",
+      "description": "Foreign key to employees table. References the employee receiving this salary."
+    },
+    {
+      "name": "effective_date",
+      "type": "date",
+      "description": "Date when this salary amount became effective. Format: YYYY-MM-DD. Use MAX(effective_date) to get current salary."
+    },
+    {
+      "name": "salary_amount",
+      "type": "decimal(12,2)",
+      "description": "Salary amount in IDR (Indonesian Rupiah). Typically monthly salary in sample data."
+    },
+    {
+      "name": "currency",
+      "type": "varchar(3)",
+      "description": "Currency code for the salary. Default is 'IDR' (Indonesian Rupiah)."
+    },
+    {
+      "name": "salary_type",
+      "type": "varchar(20)",
+      "description": "Type of salary payment. Allowed values: 'Monthly', 'Hourly', 'Annual'. Use exact string matches in queries."
+    },
+    {
+      "name": "change_reason",
+      "type": "varchar(100)",
+      "description": "Reason for the salary change (e.g., 'Initial Salary', 'Annual Raise', 'Promotion'). Can be NULL."
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "table_name": "employees",
+  "table_description": "Contains comprehensive employee information including personal details, employment status, position, department assignment, and manager relationships from 2018 to 2023.",
+  "use_cases": [
+    "Search employees by name, department, or position",
+    "Track employee-manager hierarchies",
+    "Filter active/inactive employees",
+    "Analyze employee demographics and distribution",
+    "Calculate tenure and employment duration"
+  ],
+  "data_quality_notes": [
+    "employment_status is TEXT type with CHECK constraint - use exact matches: 'Active', 'Inactive', 'On Leave', 'Terminated'",
+    "manager_id is self-referencing (employees.employee_id) - can be NULL for top-level managers/department heads",
+    "Sample data contains 15 employees with various statuses and hire dates",
+    "Email addresses follow format: firstname.lastname@company.com",
+    "Cities include Jakarta, Surabaya, and Bandung",
+    "For current employees, always filter employment_status = 'Active'"
+  ],
+  "table_columns": [
+    {
+      "name": "employee_id",
+      "type": "int",
+      "description": "Primary key. Unique identifier for each employee."
+    },
+    {
+      "name": "first_name",
+      "type": "varchar(50)",
+      "description": "Employee's first name."
+    },
+    {
+      "name": "last_name",
+      "type": "varchar(50)",
+      "description": "Employee's last name."
+    },
+    {
+      "name": "email",
+      "type": "varchar(100)",
+      "description": "Employee's email address. Unique constraint applied. Format: firstname.lastname@company.com"
+    },
+    {
+      "name": "phone",
+      "type": "varchar(20)",
+      "description": "Employee's phone number. Format: Indonesian mobile numbers starting with 0812."
+    },
+    {
+      "name": "hire_date",
+      "type": "date",
+      "description": "Date when employee was hired. Format: YYYY-MM-DD. Use for tenure calculations."
+    },
+    {
+      "name": "position_id",
+      "type": "int",
+      "description": "Foreign key to job_positions table. References the employee's current job position."
+    },
+    {
+      "name": "department_id",
+      "type": "int",
+      "description": "Foreign key to departments table. References the department where employee works."
+    },
+    {
+      "name": "manager_id",
+      "type": "int",
+      "description": "Foreign key to employees table (self-referencing). References the employee's direct manager. NULL for top-level managers and department heads."
+    },
+    {
+      "name": "employment_status",
+      "type": "varchar(20)",
+      "description": "Current employment status. Allowed values: 'Active', 'Inactive', 'On Leave', 'Terminated'. Use exact string matches in queries."
+    },
+    {
+      "name": "birth_date",
+      "type": "date",
+      "description": "Employee's date of birth. Format: YYYY-MM-DD. Use for age calculations."
+    },
+    {
+      "name": "gender",
+      "type": "varchar(10)",
+      "description": "Employee's gender. Values: 'Male' or 'Female'."
+    },
+    {
+      "name": "address",
+      "type": "text",
+      "description": "Employee's street address in Indonesia (e.g., 'Jl. Sudirman No. 123')."
+    },
+    {
+      "name": "city",
+      "type": "varchar(50)",
+      "description": "City where employee resides (e.g., 'Jakarta', 'Surabaya', 'Bandung')."
+    },
+    {
+      "name": "country",
+      "type": "varchar(50)",
+      "description": "Country where employee resides. All sample data shows 'Indonesia'."
+    }
+  ]
+}

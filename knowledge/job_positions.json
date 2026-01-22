@@ -1,0 +1,49 @@
+{
+  "table_name": "job_positions",
+  "table_description": "Contains job position definitions including titles, salary ranges, required experience, and department associations.",
+  "use_cases": [
+    "List available positions by department",
+    "Check salary ranges for specific roles",
+    "Identify positions requiring specific experience levels",
+    "Compare compensation across different positions"
+  ],
+  "data_quality_notes": [
+    "min_salary and max_salary are in IDR (Indonesian Rupiah) with DECIMAL(12,2) precision",
+    "required_experience_years is in years (integer)",
+    "Sample data includes 10 positions across 6 departments",
+    "Positions range from entry-level (1 year) to senior management (8 years experience)",
+    "Salary ranges vary from 5M IDR to 50M IDR per month"
+  ],
+  "table_columns": [
+    {
+      "name": "position_id",
+      "type": "int",
+      "description": "Primary key. Unique identifier for each job position."
+    },
+    {
+      "name": "position_title",
+      "type": "varchar(100)",
+      "description": "Title of the job position (e.g., 'Software Engineer', 'HR Manager', 'Sales Representative')."
+    },
+    {
+      "name": "department_id",
+      "type": "int",
+      "description": "Foreign key to departments table. References the department this position belongs to."
+    },
+    {
+      "name": "min_salary",
+      "type": "decimal(12,2)",
+      "description": "Minimum salary for this position in IDR (Indonesian Rupiah) per month."
+    },
+    {
+      "name": "max_salary",
+      "type": "decimal(12,2)",
+      "description": "Maximum salary for this position in IDR (Indonesian Rupiah) per month."
+    },
+    {
+      "name": "required_experience_years",
+      "type": "int",
+      "description": "Minimum years of experience required for this position."
+    }
+  ]
+}

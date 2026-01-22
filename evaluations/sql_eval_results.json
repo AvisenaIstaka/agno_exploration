@@ -1,0 +1,12 @@
+[
+  {
+    "question": "Berapa jumlah karyawan aktif di setiap departemen?",
+    "expected_sql": "SELECT d.department_name, COUNT(e.employee_id) FROM departments d JOIN employees e WHERE e.employment_status = 'Active' GROUP BY d.department_name",
+    "agent_output": "Berikut adalah jumlah karyawan aktif di setiap departemen:\n\n| Departemen           | Jumlah Karyawan Aktif |\n|----------------------|-----------------------|\n| Engineering          | 5                     |\n| Human Resources      | 3                     |\n| Sales                | 2                     |\n| Finance              | 1                     |\n| Marketing            | 1                     |\n| Operations           | 1                     |\n\nSQL query yang digunakan adalah sebagai berikut:\n\n```sql\nSELECT d.department_name, COUNT(e.employee_id) AS active_employee_count\nFROM departments d\nJOIN employees e ON d.department_id = e.department_id\nWHERE e.employment_status = 'Active'\nGROUP BY d.department_name\nORDER BY active_employee_count DESC;\n```\n\nApakah Anda ingin menyimpan query ini ke dalam basis pengetahuan?",
+    "evaluation": {
+      "score": 1,
+      "reason": "The agent's SQL query is logically equivalent to the expected SQL pattern. It correctly selects department names, counts the active employees, includes appropriate JOIN conditions, applies filtering for active employment status, and groups results by department name.",
+      "pass": true
+    }
+  }
+]

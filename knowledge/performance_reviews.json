@@ -1,0 +1,86 @@
+{
+  "table_name": "performance_reviews",
+  "table_description": "Contains employee performance review data including overall ratings, skill-specific ratings, reviewer information, and review periods from 2023 to 2024.",
+  "use_cases": [
+    "Track employee performance over time",
+    "Identify top performers by rating",
+    "Analyze performance by specific skill categories",
+    "Monitor review completion and frequency",
+    "Compare performance across departments or positions"
+  ],
+  "data_quality_notes": [
+    "All rating fields are DECIMAL(3,2) with CHECK constraint BETWEEN 1 AND 5",
+    "overall_rating is required, skill-specific ratings can vary",
+    "reviewer_id references employees.employee_id - typically the employee's manager",
+    "Sample data contains 8 reviews from 2023-2024",
+    "Use MAX(review_date) subquery to get employee's latest review",
+    "review_period_start and review_period_end define the evaluation period (typically 6 months)"
+  ],
+  "table_columns": [
+    {
+      "name": "review_id",
+      "type": "int",
+      "description": "Primary key. Unique identifier for each performance review."
+    },
+    {
+      "name": "employee_id",
+      "type": "int",
+      "description": "Foreign key to employees table. References the employee being reviewed."
+    },
+    {
+      "name": "review_date",
+      "type": "date",
+      "description": "Date when the review was conducted. Format: YYYY-MM-DD."
+    },
+    {
+      "name": "reviewer_id",
+      "type": "int",
+      "description": "Foreign key to employees table. References the employee conducting the review (typically the manager)."
+    },
+    {
+      "name": "review_period_start",
+      "type": "date",
+      "description": "Start date of the period being reviewed. Format: YYYY-MM-DD."
+    },
+    {
+      "name": "review_period_end",
+      "type": "date",
+      "description": "End date of the period being reviewed. Format: YYYY-MM-DD."
+    },
+    {
+      "name": "overall_rating",
+      "type": "decimal(3,2)",
+      "description": "Overall performance rating on a scale of 1.00 to 5.00. Higher is better. Required field."
+    },
+    {
+      "name": "technical_skills_rating",
+      "type": "decimal(3,2)",
+      "description": "Rating for technical skills on a scale of 1.00 to 5.00. Can be NULL."
+    },
+    {
+      "name": "communication_rating",
+      "type": "decimal(3,2)",
+      "description": "Rating for communication skills on a scale of 1.00 to 5.00. Can be NULL."
+    },
+    {
+      "name": "teamwork_rating",
+      "type": "decimal(3,2)",
+      "description": "Rating for teamwork and collaboration on a scale of 1.00 to 5.00. Can be NULL."
+    },
+    {
+      "name": "leadership_rating",
+      "type": "decimal(3,2)",
+      "description": "Rating for leadership abilities on a scale of 1.00 to 5.00. Can be NULL."
+    },
+    {
+      "name": "comments",
+      "type": "text",
+      "description": "Reviewer's detailed comments and feedback about the employee's performance. Can be NULL."
+    },
+    {
+      "name": "goals_next_period",
+      "type": "text",
+      "description": "Goals and objectives set for the next review period. Can be NULL."
+    }
+  ]
+}

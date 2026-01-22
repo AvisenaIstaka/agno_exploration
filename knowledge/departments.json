@@ -1,0 +1,48 @@
+{
+  "table_name": "departments",
+  "table_description": "Contains information about organizational departments including budget, location, and department head assignments.",
+  "use_cases": [
+    "List all departments and their locations",
+    "Calculate total budget across departments",
+    "Identify department heads",
+    "Track department organizational structure"
+  ],
+  "data_quality_notes": [
+    "department_head_id references employees.employee_id - use JOIN to get head details",
+    "department_head_id can be NULL initially, updated after employees are inserted",
+    "budget is in IDR (Indonesian Rupiah) with DECIMAL(15,2) precision",
+    "Contains 6 departments: Engineering, Human Resources, Sales, Marketing, Finance, Operations"
+  ],
+  "table_columns": [
+    {
+      "name": "department_id",
+      "type": "int",
+      "description": "Primary key. Unique identifier for each department."
+    },
+    {
+      "name": "department_name",
+      "type": "varchar(100)",
+      "description": "Name of the department (e.g., 'Engineering', 'Human Resources', 'Sales')."
+    },
+    {
+      "name": "department_head_id",
+      "type": "int",
+      "description": "Foreign key to employees table. References the employee who heads this department. Can be NULL."
+    },
+    {
+      "name": "location",
+      "type": "varchar(100)",
+      "description": "Physical location of the department (e.g., 'Jakarta', 'Surabaya', 'Bandung')."
+    },
+    {
+      "name": "budget",
+      "type": "decimal(15,2)",
+      "description": "Annual budget allocated to the department in IDR (Indonesian Rupiah)."
+    },
+    {
+      "name": "created_date",
+      "type": "date",
+      "description": "Date when the department was established. Format: YYYY-MM-DD."
+    }
+  ]
+}

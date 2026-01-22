@@ -8,11 +8,16 @@ from dotenv import load_dotenv
 from hooks.pre_hooks import validate_out_of_context
 from knowledge import knowledge
 from agno.models.huggingface import HuggingFace
+from agno.db.postgres import PostgresDb
+from sql_agent import sql_agent
 
 
 load_dotenv()
 
-db = SqliteDb(id="my_agent_db", db_file="agno.db")
+db = PostgresDb(
+    id="my_agent_db",
+    db_url="postgresql://agno_user:admin@localhost:5432/agno_db"
+)
 
 local_agent = Agent(
     name="Local Agent",
@@ -89,7 +94,7 @@ leave_agent = Agent(
 )
 
 agent_os = AgentOS(
-    agents=[local_agent, general_agent, dsi_agent, leave_agent]
+    agents=[sql_agent, local_agent, general_agent, dsi_agent]
 )
 
 app = agent_os.get_app()

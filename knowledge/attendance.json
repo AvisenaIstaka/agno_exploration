@@ -1,0 +1,58 @@
+{
+  "table_name": "attendance",
+  "table_description": "Contains daily attendance records for employees, including check-in/out times, work hours, and attendance status from 2025.",
+  "use_cases": [
+    "Track employee attendance patterns",
+    "Calculate work hours by employee or department",
+    "Identify late arrivals and absences",
+    "Monitor remote work frequency"
+  ],
+  "data_quality_notes": [
+    "status is TEXT type with CHECK constraint - use exact matches: 'Present', 'Absent', 'Late', 'Half Day', 'Remote'",
+    "check_in_time and check_out_time can be NULL for 'Absent' status",
+    "work_hours is DECIMAL(4,2) - may be 0.0 for absences",
+    "Sample data only covers recent dates (January 2025) for first 5 employees"
+  ],
+  "table_columns": [
+    {
+      "name": "attendance_id",
+      "type": "int",
+      "description": "Primary key. Unique identifier for each attendance record."
+    },
+    {
+      "name": "employee_id",
+      "type": "int",
+      "description": "Foreign key to employees table. References the employee for this attendance record."
+    },
+    {
+      "name": "attendance_date",
+      "type": "date",
+      "description": "Date of the attendance record. Format: YYYY-MM-DD."
+    },
+    {
+      "name": "check_in_time",
+      "type": "time",
+      "description": "Time employee checked in. Format: HH:MM:SS. NULL for absent days."
+    },
+    {
+      "name": "check_out_time",
+      "type": "time",
+      "description": "Time employee checked out. Format: HH:MM:SS. NULL for absent days."
+    },
+    {
+      "name": "status",
+      "type": "text",
+      "description": "Attendance status for the day. Allowed values: 'Present', 'Absent', 'Late', 'Half Day', 'Remote'. Use exact string matches in queries."
+    },
+    {
+      "name": "work_hours",
+      "type": "decimal(4,2)",
+      "description": "Total hours worked that day. Typically 8.0 for full day, 4.0 for half day, 0.0 for absent."
+    },
+    {
+      "name": "notes",
+      "type": "text",
+      "description": "Optional notes about the attendance (e.g., 'Traffic jam', 'Sick leave', 'Work from home'). Can be NULL."
+    }
+  ]
+}
